@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# 10GB in bytes
+DEFAULT_THRESHOLD=10
+threshold=${1:-$DEFAULT_THRESHOLD}
+
+while true; do
+  # Get free disk space in bytes
+  free_space=$(df -h / | awk 'NR==2 {print $4}' | sed 's/.$//')
+
+  if [ $free_space -lt $threshold ]; then
+    echo "WARNING: Free space ${free_space}GB is below ${threshold}GB"
+  fi
+
+  sleep 1m
+done
