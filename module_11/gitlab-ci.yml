@@ -1,0 +1,36 @@
+image: node:latest
+
+stages:
+  - test
+  - build
+  - deploy
+
+unit_test:
+  stage: test
+  script:
+    - npm install
+    - npm run test
+
+eslint_check:
+  stage: test
+  script:
+    - npm install
+    - npm run lint
+
+npm_audit:
+  stage: test
+  script:
+    - npm install
+    - npm audit
+
+build_app:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+
+deploy_app:
+  stage: deploy
+  script:
+    - echo "Deploying the app..."
+    # Will be deployment commands
